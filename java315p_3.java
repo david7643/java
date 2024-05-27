@@ -31,9 +31,25 @@ class Won2Dollar extends Converter{
 		return "달러";
 	}
 }
+class Km2Mile extends Converter{
+	Scanner scan = new  Scanner(System.in);
+	double Mile;
+	Km2Mile(double Mile){
+		this.Mile = Mile;
+	}
+	protected double convert(double src) {
+		return src/Mile;
+	}
+	protected String getSrcString() {
+		return "Km";
+	}
+	protected String getDestString() {
+		return "Mile";
+	}
+}
 public class java315p_3 {
 	public static void main(String[] args) {
-		Won2Dollar toDollar = new Won2Dollar(1363);
-		toDollar.run();
+		Km2Mile toMile = new Km2Mile(1.6);
+		toMile.run();
 	}
 }
