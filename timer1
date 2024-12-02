@@ -1,0 +1,81 @@
+package timer;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Timer extends JFrame {
+	public void Timer() {
+		setTitle("타이머");
+		setSize(700,700);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(new FlowLayout());
+		JLabel timerLabel = new JLabel();
+		timerLabel.setFont(new Font("Gothic",Font.ITALIC,80));
+		c.add(timerLabel);
+		TimerRunnable runnable = new TimerRunnable(timerLabel);
+		Thread th = new Thread(runnable);
+		setVisible(true);
+		th.start();
+	}
+	public static void main(String[] args) {
+		new Timer();
+	}
+}
+
+class TimerRunnable implements Runnable{
+	private JLabel timerLabel;
+	private int n;
+	public TimerRunnable(JLabel timerLabel){
+		this.timerLabel=timerLabel;
+	}
+	public TimerRunnable(int n){
+		this.n=n;
+	}
+	public void run() {
+		while(true) {
+			timerLabel.setText(Integer.toString(n));
+			n--;
+			try {
+				Thread.sleep(1000);
+				if(n==0)
+					break;
+				else
+					continue;
+			}
+			catch(InterruptedException e){
+				return;
+			}
+		}
+	}
+	public void panel() {
+		
+	}
+}
+public class button extends JLabel {
+	public button() {
+		JButton btn1 = new JButton("5초");
+		JButton btn2 = new JButton("10초");
+		JButton btn3 = new JButton("15초");
+	btn1.addActionListener(new ActionListener() { 
+		public void actionPerformed(ActionEvent e) 
+		{ 	
+			TimerRunnable runnable = new TimerRunnable(5);
+			} 
+		});
+	btn2.addActionListener(new ActionListener() { 
+		public void actionPerformed(ActionEvent e) 
+		{TimerRunnable runnable = new TimerRunnable(10);
+			} 
+		});
+	btn3.addActionListener(new ActionListener() { 
+		public void actionPerformed(ActionEvent e) 
+		{TimerRunnable runnable = new TimerRunnable(15);
+			} 
+		});
+	this.add(btn1);	
+	this.add(btn2);	
+	this.add(btn3);	
+}
+}
+	
